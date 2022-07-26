@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="app_name">Export Demo</string>
+
+    <string name="ok">确定</string>
+
+    <string name="sale">下单</string>
+    <string name="revoke">撤销订单</string>
+    <string name="get_sale_order">查询订单</string>
+
+    <string name="amount">订单总金额（单位元）。例如：12.00</string>
+
+    <string name="mis_order_number">mis 订单号</string>
+    <string name="original_mis_order_number">原始 mis 订单号</string>
+
+    <string name="payment_method">支付方式</string>
+    <string name="payment_method_pay_by">PayBy</string>
+    <string name="payment_method_bot_im">BoTIM</string>
+    <string name="payment_method_bank_card">Bank_Card</string>
+
+    <string name="print_receipt_type">打印收据方式</string>
+    <string name="print_receipt_type_none">不打印收据</string>
+    <string name="print_receipt_type_customer">打印客户收据</string>
+    <string name="print_receipt_type_merchant">打印商户收据</string>
+    <string name="print_receipt_type_both">打印客户收据和商户收据</string>
+
+</resources>

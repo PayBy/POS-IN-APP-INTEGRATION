@@ -1,0 +1,27 @@
+<resources>
+
+    <string name="app_name">POSDemo</string>
+
+    <string name="ok">OK</string>
+
+    <string name="sale">Sale</string>
+    <string name="revoke">Void</string>
+    <string name="get_sale_order">Inquire Order</string>
+
+    <string name="amount">total amount, example: 12.05</string>
+
+    <string name="mis_order_number">mis order number</string>
+    <string name="original_mis_order_number">original mis order number</string>
+
+    <string name="payment_method">Payment method</string>
+    <string name="payment_method_pay_by">PayBy</string>
+    <string name="payment_method_bot_im">BoTIM</string>
+    <string name="payment_method_bank_card">Bank_Card</string>
+
+    <string name="print_receipt_type">Print receipt type</string>
+    <string name="print_receipt_type_none">Do not print receipts</string>
+    <string name="print_receipt_type_customer">Print customer receipt</string>
+    <string name="print_receipt_type_merchant">Print merchant receipt</string>
+    <string name="print_receipt_type_both">Print customer and merchant receipt</string>
+
+</resources>

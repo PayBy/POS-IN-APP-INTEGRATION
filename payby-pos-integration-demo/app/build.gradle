@@ -1,0 +1,84 @@
+plugins {
+    id 'com.android.application'
+
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk 31
+    defaultConfig {
+        applicationId "com.payby.export.demo"
+        minSdk 21
+        targetSdk 31
+        versionCode 10
+        versionName "1.1.10"
+    }
+    signingConfigs {
+        test {
+            keyAlias "weak"
+            keyPassword "weak123"
+            storePassword "weak123"
+            storeFile file('../app/weak.jks')
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.test
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        uat {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.test
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.test
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "payby-pos-integration-demo_" + defaultConfig.versionName + "_" + buildType.name + ".apk"
+        }
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    lintOptions {
+        abortOnError false
+    }
+    // gradle7.0 no longer needs such dependencies
+    // repositories {
+    //     flatDir { dirs 'libs' }
+    // }
+    sourceSets {
+        main { jniLibs.srcDirs = ['libs'] }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    uatImplementation files('libs/payby-export-payment-1.1.7_uat.aar')
+    debugImplementation files('libs/payby-export-payment-1.1.7_release.aar')
+    releaseImplementation files('libs/payby-export-payment-1.1.7_release.aar')
+    // gradle7.0 no longer needs such dependencies
+    // uatImplementation(name: 'payby-export-payment-1.1.7_uat', ext: 'aar')
+    // debugImplementation(name: 'payby-export-payment-1.1.7_release', ext: 'aar')
+    // releaseImplementation(name: 'payby-export-payment-1.1.7_release', ext: 'aar')
+
+    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+}
