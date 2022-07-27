@@ -1,14 +1,15 @@
 package com.payby.export.demo.ui
 
 import android.os.Bundle
-import com.payby.export.demo.BuildConfig
+import com.google.gson.Gson
+import com.payby.export.demo.App
 import com.payby.export.demo.databinding.ActivityVoidBinding
 import com.payby.export.demo.databinding.IncludePrintReceiptBinding
 import com.payby.export.demo.ui.entity.Request
+import com.payby.export.demo.util.Logger
+import com.payby.pos.export.api.ExportResponseCallback
+import com.payby.pos.export.api.PayByExportPaymentService
 
-/**
- * not support VOID transaction
- */
 class VoidActivity : BaseActivity() {
 
     private lateinit var binding: ActivityVoidBinding
@@ -25,19 +26,26 @@ class VoidActivity : BaseActivity() {
         initPrintReceiptType(receiptBinding.printReceiptRadio)
         binding.okBtn.setOnClickListener {
             val request = Request()
-            var orderNumber = binding.orderNumberEdit.text.toString()
-            val originalOrderNumber = binding.originalOrderNumberEdit.text.toString()
-            if (orderNumber.trim().length < 8) {
-                orderNumber = BuildConfig.APPLICATION_ID + System.currentTimeMillis()
-            }
+            request.messageType = "Request"
+            request.functionName = "VOID"
             request.requestTime = System.currentTimeMillis()
             request.messageId = System.currentTimeMillis().toString()
-            request.misOrderNo = orderNumber
-            request.originalMisOrderNo = originalOrderNumber
-            request.functionName = "VOID"
+            request.misOrderNo = binding.orderNumberEdit.text.toString()
+            request.originalMisOrderNo = binding.originalOrderNumberEdit.text.toString()
             request.printReceiptType = receiptType
-            startTransaction(request)
+            val jsonString = Gson().toJson(request)
+            PayByExportPaymentService.getInstance().startTransaction(jsonString, responseCallback)
         }
+    }
+
+    private val responseCallback = object : ExportResponseCallback.Stub() {
+
+        override fun onResponse(response: String ? ) {
+            Logger.e(App.TAG, "response:$response")
+            ResultActivity.startAction(baseContext, response)
+            finish()
+        }
+
     }
 
 }
