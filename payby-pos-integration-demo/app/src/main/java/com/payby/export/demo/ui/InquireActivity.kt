@@ -22,14 +22,14 @@ class InquireActivity : BaseActivity() {
     }
 
     private fun initView() {
-        binding.okBtn.setOnClickListener {
-            var transactionType = "SALE"
-            binding.transactionTypeRadio.setOnCheckedChangeListener { _, checkedId ->
-                when (checkedId) {
-                    R.id.transaction_type_sale -> transactionType = "SALE"
-                    R.id.transaction_type_void -> transactionType = "VOID"
-                }
+        var transactionType = "SALE"
+        binding.transactionTypeRadio.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.transaction_type_sale -> transactionType = "SALE"
+                R.id.transaction_type_void -> transactionType = "VOID"
             }
+        }
+        binding.okBtn.setOnClickListener {
             val request = Request()
             request.messageType = "Request"
             request.functionName = "GET_ORDER"
@@ -41,7 +41,6 @@ class InquireActivity : BaseActivity() {
             PayByExportPaymentService.getInstance().startTransaction(jsonString, responseCallback)
         }
     }
-
 
     private val responseCallback = object : ExportResponseCallback.Stub() {
 

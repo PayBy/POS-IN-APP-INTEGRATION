@@ -8,6 +8,7 @@
     <string name="revoke">撤销订单</string>
     <string name="get_sale_order">查询订单</string>
 
+    <string name="tips">小费金额（单位元）。例如：12.00</string>
     <string name="amount">订单总金额（单位元）。例如：12.00</string>
     <string name="transaction_type">交易类型</string>
     <string name="mis_order_number">mis 订单号</string>

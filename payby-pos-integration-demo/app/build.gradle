@@ -10,8 +10,8 @@ android {
         applicationId "com.payby.export.demo"
         minSdk 21
         targetSdk 31
-        versionCode 11
-        versionName "1.1.11"
+        versionCode 13
+        versionName "1.1.13"
     }
     signingConfigs {
         test {

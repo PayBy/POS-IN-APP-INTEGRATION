@@ -38,6 +38,12 @@ class SaleActivity : BaseActivity() {
         binding.okBtn.setOnClickListener {
             val request = Request()
             try {
+                val tipsString = binding.tipsEdit.text.toString()
+                request.tipAmount = tipsString.toDouble()
+            } catch (ex: Throwable) {
+                ex.printStackTrace()
+            }
+            try {
                 val amountString = binding.amountEdit.text.toString()
                 request.totalAmount = amountString.toDouble()
             } catch (ex: Throwable) {
@@ -72,7 +78,7 @@ class SaleActivity : BaseActivity() {
         try {
             val response = Gson().fromJson(responseString, Response::class.java)
             if (response.functionName == "NOTIFY_ORDER" && response.messageType == "Request") {
-                Logger.e(App.TAG, "响应通知消息")
+                Logger.e(App.TAG, "notification message response data")
                 val request = NotificationRequest()
                 request.messageType = "Response"
                 request.messageId = response.messageId

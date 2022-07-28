@@ -8,6 +8,7 @@
     <string name="revoke">Void</string>
     <string name="get_sale_order">Inquire Order</string>
 
+    <string name="tips">tips amount, example: 12.05</string>
     <string name="amount">total amount, example: 12.05</string>
     <string name="transaction_type">Transaction type</string>
     <string name="mis_order_number">mis order number</string>
