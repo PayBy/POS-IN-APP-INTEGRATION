@@ -50,6 +50,7 @@ class ResultActivity : AppCompatActivity() {
         fun startAction(context: Context, response: String ? = null) {
             val intent = Intent(context, ResultActivity::class.java)
             intent.putExtra("extra_response", response)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
         }
 

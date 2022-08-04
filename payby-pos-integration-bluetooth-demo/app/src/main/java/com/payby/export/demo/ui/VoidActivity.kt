@@ -87,7 +87,6 @@ class VoidActivity : BaseActivity() {
                     val response = String(bytes, Charsets.UTF_8)
                     Logger.e(App.TAG, "response:$response")
                     ResultActivity.startAction(baseContext, response)
-                    finish()
                 }
             } catch (e: Throwable) {
                 e.printStackTrace()
