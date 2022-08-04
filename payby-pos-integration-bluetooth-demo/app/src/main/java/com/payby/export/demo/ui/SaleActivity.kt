@@ -111,7 +111,7 @@ class SaleActivity : BaseActivity() {
                     val response = String(bytes, Charsets.UTF_8)
                     Logger.e(App.TAG, "response:$response")
                     // send notification response message
-                    sendNotificationResponse(response)
+                    // sendNotificationResponse(response)
                     ResultActivity.startAction(baseContext, response)
                     finish()
                 }

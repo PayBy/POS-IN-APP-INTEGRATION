@@ -25,11 +25,4 @@
     <string name="print_receipt_type_merchant">打印商户收据</string>
     <string name="print_receipt_type_both">打印客户收据和商户收据</string>
 
-    <string name="mode_bluetooth">蓝牙连接</string>
-    <string name="dialog_select_bluetooth">请选择蓝牙设备</string>
-
-    <string name="error_bluetooth_disable">请先打开设备蓝牙功能</string>
-    <string name="error_bluetooth_not_support">该设备不支持蓝牙</string>
-    <string name="error_bluetooth_not_find_bonded">没有找到已配对的蓝牙</string>
-
 </resources>

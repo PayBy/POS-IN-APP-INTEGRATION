@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">POSDemo</string>
+    <string name="app_name">POS Bluetooth Demo</string>
 
     <string name="ok">OK</string>
 
@@ -24,12 +24,5 @@
     <string name="print_receipt_type_customer">Print customer receipt</string>
     <string name="print_receipt_type_merchant">Print merchant receipt</string>
     <string name="print_receipt_type_both">Print customer and merchant receipt</string>
-
-    <string name="mode_bluetooth">Bluetooth Connect</string>
-    <string name="dialog_select_bluetooth">Please select a bluetooth device</string>
-
-    <string name="error_bluetooth_disable">Please turn on the device bluetooth first</string>
-    <string name="error_bluetooth_not_support">The device does not support bluetooth</string>
-    <string name="error_bluetooth_not_find_bonded">No paired bluetooth found</string>
 
 </resources>

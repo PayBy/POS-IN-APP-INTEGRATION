@@ -1,24 +1,16 @@
 package com.payby.export.demo.ui
 
 import android.annotation.SuppressLint
-import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
-import com.afollestad.materialdialogs.MaterialDialog
-import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
-import com.afollestad.materialdialogs.list.listItems
-import com.payby.export.demo.App
-import com.payby.export.demo.R
+import com.payby.ecr.kernel.ECRServiceKernel
 import com.payby.export.demo.databinding.ActivityMainBinding
-import com.payby.export.demo.util.Logger
 import com.payby.export.demo.util.openActivity
 
+@Suppress("SimplifyBooleanWithConstants")
 @SuppressLint("CheckResult")
 class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
-    private var bluetoothAddress = ""
-    private val bluetoothList = HashMap<String, String>()
 
     override fun onCreate(savedInstanceState: Bundle ? ) {
         super.onCreate(savedInstanceState)
@@ -28,59 +20,43 @@ class MainActivity : BaseActivity() {
     }
 
     private fun initView() {
-        binding.saleBtn.setOnClickListener { openActivity<SaleActivity>() }
-        binding.voidBtn.setOnClickListener { openActivity<VoidActivity>() }
-        binding.inquireOrderBtn.setOnClickListener { openActivity<InquireActivity>() }
-        binding.bluetoothModeBtn.setOnClickListener {
-            selectBluetooth()
+        binding.saleBtn.setOnClickListener {
+            val check = preCheck()
+            if (check) {
+                openActivity<SaleActivity>()
+            }
+        }
+        binding.voidBtn.setOnClickListener {
+            val check = preCheck()
+            if (check) {
+                openActivity<VoidActivity>()
+            }
+        }
+        binding.inquireOrderBtn.setOnClickListener {
+            val check = preCheck()
+            if (check) {
+                openActivity<InquireActivity>()
+            }
         }
     }
 
-    private fun selectBluetooth() {
-        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
-        if (bluetoothAdapter != null) {
-            if (bluetoothAdapter.isEnabled) {
-                bluetoothList.clear()
-                val bondedDevices = bluetoothAdapter.bondedDevices
-                if (bondedDevices != null && bondedDevices.size > 0) {
-                    for (bluetoothDevice in bondedDevices) {
-                        val name = bluetoothDevice.name
-                        val address = bluetoothDevice.address
-                        Logger.e(App.TAG, "name: $name")
-                        Logger.e(App.TAG, "address: $address")
-                        if (address == "00:11:22:33:44:55") {
-                            // this is default printer bluetooth
-                            continue
-                        }
-                        bluetoothList["$name - $address"] = address
-                    }
-                }
-                if (bluetoothList.size > 0) {
-                    showBluetoothDialog()
-                } else {
-                    showToast(R.string.error_bluetooth_not_find_bonded)
-                }
-            } else {
-                showToast(R.string.error_bluetooth_disable)
-            }
-        } else {
-            showToast(R.string.error_bluetooth_not_support)
+    private fun preCheck(): Boolean {
+        val ecrService = ECRServiceKernel.getInstance().ecrService
+        if (ecrService == null) {
+            showToast("Please connect to the ECR Service first")
+            return false
         }
-    }
-
-    private fun showBluetoothDialog() {
-        val arrays = bluetoothList.keys.toList()
-        MaterialDialog(this).show {
-            setCancelable(false)
-            message(R.string.dialog_select_bluetooth)
-            setCanceledOnTouchOutside(false)
-            listItems(items = arrays) { _, index, text ->
-                Logger.e(App.TAG, "index: $index text: $text")
-                bluetoothAddress = bluetoothList[text] ?: ""
-            }
-            positiveButton(R.string.ok)
-            lifecycleOwner(this@MainActivity)
+        val isConnected = try {
+            ecrService.isConnected
+        } catch (e: Throwable) {
+            e.printStackTrace()
+            false
         }
+        if (isConnected == false) {
+            showToast("Please use ECR Service for bluetooth connection")
+            return false
+        }
+        return true
     }
 
 }
