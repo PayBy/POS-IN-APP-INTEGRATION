@@ -41,7 +41,7 @@ android {
     }
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "payby-pos-integration-demo_" + defaultConfig.versionName + "_" + buildType.name + ".apk"
+            outputFileName = "payby-pos-integration-bluetooth-demo_" + defaultConfig.versionName + "_" + buildType.name + ".apk"
         }
     }
     buildFeatures {
@@ -77,7 +77,6 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     implementation 'com.google.code.gson:gson:2.9.0'
-
     implementation 'com.afollestad.material-dialogs:core:3.3.0'
     implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
 }

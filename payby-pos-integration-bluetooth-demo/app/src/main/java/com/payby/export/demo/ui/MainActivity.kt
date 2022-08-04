@@ -1,17 +1,23 @@
 package com.payby.export.demo.ui
 
+import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.lifecycle.lifecycleOwner
+import com.afollestad.materialdialogs.list.listItems
 import com.payby.export.demo.App
+import com.payby.export.demo.R
 import com.payby.export.demo.databinding.ActivityMainBinding
 import com.payby.export.demo.util.Logger
 import com.payby.export.demo.util.openActivity
 
-class MainActivity : AppCompatActivity() {
+@SuppressLint("CheckResult")
+class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private var bluetoothAddress = ""
     private val bluetoothList = HashMap<String, String>()
 
     override fun onCreate(savedInstanceState: Bundle ? ) {
@@ -25,9 +31,12 @@ class MainActivity : AppCompatActivity() {
         binding.saleBtn.setOnClickListener { openActivity<SaleActivity>() }
         binding.voidBtn.setOnClickListener { openActivity<VoidActivity>() }
         binding.inquireOrderBtn.setOnClickListener { openActivity<InquireActivity>() }
+        binding.bluetoothModeBtn.setOnClickListener {
+            selectBluetooth()
+        }
     }
 
-    private fun switchBluetooth() {
+    private fun selectBluetooth() {
         val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
         if (bluetoothAdapter != null) {
             if (bluetoothAdapter.isEnabled) {
@@ -49,13 +58,28 @@ class MainActivity : AppCompatActivity() {
                 if (bluetoothList.size > 0) {
                     showBluetoothDialog()
                 } else {
-                    showToast(R.string.message_bluetooth_not_find_bonded)
+                    showToast(R.string.error_bluetooth_not_find_bonded)
                 }
             } else {
-                showToast(R.string.message_bluetooth_disable)
+                showToast(R.string.error_bluetooth_disable)
             }
         } else {
-            showToast(R.string.message_bluetooth_not_support)
+            showToast(R.string.error_bluetooth_not_support)
+        }
+    }
+
+    private fun showBluetoothDialog() {
+        val arrays = bluetoothList.keys.toList()
+        MaterialDialog(this).show {
+            setCancelable(false)
+            message(R.string.dialog_select_bluetooth)
+            setCanceledOnTouchOutside(false)
+            listItems(items = arrays) { _, index, text ->
+                Logger.e(App.TAG, "index: $index text: $text")
+                bluetoothAddress = bluetoothList[text] ?: ""
+            }
+            positiveButton(R.string.ok)
+            lifecycleOwner(this@MainActivity)
         }
     }
 
