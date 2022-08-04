@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="Autofill">
+
+    <EditText
+        android:id="@+id/order_number_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/mis_order_number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/text_hint"
+        android:textSize="14sp"
+        tools:ignore="TextFields" />
+
+    <EditText
+        android:id="@+id/original_order_number_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:hint="@string/original_mis_order_number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/text_hint"
+        android:textSize="14sp"
+        tools:ignore="TextFields" />
+
+    <include layout="@layout/include_print_receipt" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/ok_btn"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/ok" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

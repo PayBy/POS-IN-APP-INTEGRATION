@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/print_receipt_type"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <RadioGroup
+        android:id="@+id/print_receipt_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/print_receipt_none"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/print_receipt_type_none"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/print_receipt_customer"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/print_receipt_type_customer"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/print_receipt_merchant"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="@string/print_receipt_type_merchant"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:id="@+id/print_receipt_both"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:checked="true"
+            android:text="@string/print_receipt_type_both"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+</merge>
